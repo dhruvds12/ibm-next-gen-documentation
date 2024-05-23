@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/chatbot.unity
     guid: 7706a14fe68ad9545ab10b5489452460
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 2c849029695511e43b905b61913fd2ce
   m_configObjects:

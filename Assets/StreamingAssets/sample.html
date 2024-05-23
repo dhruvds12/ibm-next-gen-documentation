@@ -1,36 +1,29 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Unity WebView</title>
-    <script src="sample.js"></script>
-    <!-- geolocation example
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
     <script>
-      window.addEventListener(
-        'load',
-        function() {
-          if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              document.getElementById('msg').innerHTML = '[' + position.coords.latitude + ', ' + position.coords.longitude + ']';
-            });
-          }
+        window.watsonAssistantChatOptions = {
+            integrationID: "4c92589f-e4e5-4f3d-bb81-0ceaa75770ed", // The ID of this integration.
+            region: "eu-gb", // The region your integration is hosted in.
+            serviceInstanceID: "df25bd48-5ebb-4b42-b865-b480168b8770", // The ID of your service instance.
+            onLoad: function (instance) {
+                instance.render();
+            },
+            showLauncher: false, // Hide the web chat launcher, you will open the WebView from your mobile application
+            openChatByDefault: true, // When the web chat WebView is opened, the web chat will already be open and ready to go.
+            hideCloseButton: true // And the web chat will not show a close button, instead relying on the controls to close the WebView
+        };
+        setTimeout(function () {
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
         });
     </script>
-    -->
-  </head>
-  <body>
-    <h1>Hello Unity WebView!</h1>
-    <hr/>
-    <p><a href="https://google.com">https://google.com</a> (for testing go/back buttons)</p>
-    <p><a href="http://httpbin.org/headers">http://httpbin.org/headers</a> (for testing custom headers.)</p>
-    <p><img id="img" src="sample.jpg"/> (local image)</p>
-    <p><a href="javascript:void(0)" onclick="testSaveDataURL();">Test saveDataURL</a> (experimental, only for Android/iOS)</p>
-    <hr/>
-    <div id="msg">[]</div>
-    <p><a href="javascript:void(0)" onclick="Unity.call('anchor');">[Send Message!]</a></p>
-    <form method="get" action="form">
-      <input id="input1" type="text" value="hoge" name="msg"/>
-      <input type="submit" value="Send Message!" onclick="Unity.call('form?msg=' + document.getElementById('input1').value); return false;"/><br/>
-      <input type="file" name="datafile"/>
-    </form>
-  </body>
+</body>
+
 </html>

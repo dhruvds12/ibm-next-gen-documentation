@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using UnityEngine;
 #if UNITY_2018_4_OR_NEWER
 using UnityEngine.Networking;
@@ -10,10 +10,6 @@ public class SampleWebView : MonoBehaviour
     public string Url = "file:///android_asset/watsonAssistant.html"; // Update this path to match your hosted or local file
     public Text status;
     WebViewObject webViewObject;
-
-    private RectTransform rectTransform;
-    private bool keyboardVisible;
-    private float keyboardHeight;
 
     IEnumerator Start()
     {
@@ -65,12 +61,13 @@ public class SampleWebView : MonoBehaviour
                 var js = "";
 #endif
                 webViewObject.EvaluateJS(js + @"Unity.call('ua=' + navigator.userAgent)");
-            },
-            transparent: true // Set the WebView to be transparent
+            }
         );
-/*        webViewObject.SetMargins(0, 0, 0, 0); // Ensure it covers the full screen
+
+        // Set margins to cover the entire screen
+        webViewObject.SetMargins(0, 100, 0, 0);
         webViewObject.SetTextZoom(100);
-        webViewObject.SetVisibility(true);*/
+        webViewObject.SetVisibility(true);
 
 #if !UNITY_WEBPLAYER && !UNITY_WEBGL
         if (Url.StartsWith("http"))
@@ -115,42 +112,6 @@ public class SampleWebView : MonoBehaviour
         yield break;
     }
 
-    void Update()
-    {
-        // Check if the keyboard is visible
-        if (TouchScreenKeyboard.visible)
-        {
-            if (!keyboardVisible)
-            {
-                keyboardVisible = true;
-                keyboardHeight = TouchScreenKeyboard.area.height;
-                AdjustWebViewForKeyboard(true);
-            }
-        }
-        else
-        {
-            if (keyboardVisible)
-            {
-                keyboardVisible = false;
-                AdjustWebViewForKeyboard(false);
-            }
-        }
-    }
-
-    void AdjustWebViewForKeyboard(bool visible)
-    {
-        if (visible)
-        {
-            // Adjust the bottom margin to leave space for the keyboard
-            webViewObject.SetMargins(0, 0, 0, (int)(keyboardHeight / Screen.height * 100));
-        }
-        else
-        {
-            // Reset the margins when the keyboard is hidden
-            webViewObject.SetMargins(0, 0, 0, 0);
-        }
-    }
-
     void OnDestroy()
     {
         if (webViewObject != null)
@@ -159,3 +120,4 @@ public class SampleWebView : MonoBehaviour
         }
     }
 }
+*/
