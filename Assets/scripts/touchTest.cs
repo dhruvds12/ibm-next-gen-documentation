@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
+
 public class touchTest : MonoBehaviour
 {
     public GameObject marsinfo;
     public GameObject earthinfo;
+
+    //public TMP_Text infoBox;
     // Start is called before the first frame update
     void Start()
     {

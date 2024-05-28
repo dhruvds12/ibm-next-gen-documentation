@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class togglePopup : MonoBehaviour
 {
@@ -9,12 +10,22 @@ public class togglePopup : MonoBehaviour
     public GameObject earthinfo;
     public Toggle interactionToggle;
 
+    public List<string> marsInfoText = new List<string>(); // used to store the text for the info box
+    public List<string> earthInfoText = new List<string>(); // used to store the text for the info box
+
+    public TMP_Text infoBox;
+    public Canvas canvas;
+
     private bool isDetailedInteractionEnabled;
     private Dictionary<string, GameObject> activePopups = new Dictionary<string, GameObject>();
+
+    private int marsInfoPointer = -1;
+    private int earthInfoPointer = -1;
 
     // Start is called before the first frame update
     void Start()
     {
+        canvas.enabled = false;
         if (interactionToggle != null)
         {
             interactionToggle.onValueChanged.AddListener(delegate { ToggleValueChanged(interactionToggle); });
@@ -52,7 +63,7 @@ public class togglePopup : MonoBehaviour
                 if (hit.transform.tag == "earthInfo")
                 {
                     Destroy(hit.transform.gameObject);
-                    activePopups.Remove("mars");
+                    activePopups.Remove("earth2");
                 }
             }
         }
@@ -62,7 +73,18 @@ public class togglePopup : MonoBehaviour
     {
         if (isDetailedInteractionEnabled)
         {
-            // Placeholder for future detailed card implementation
+            canvas.enabled = true;
+            if (tag == "mars")
+            {
+                marsInfoPointer = 0;
+                displayInfo(tag, marsInfoPointer);
+            }
+            else if (tag == "earth2")
+            {
+                earthInfoPointer = 0;
+                displayInfo(tag, earthInfoPointer);
+            }
+
             return;
         }
 
@@ -81,5 +103,46 @@ public class togglePopup : MonoBehaviour
     void ToggleValueChanged(Toggle change)
     {
         isDetailedInteractionEnabled = change.isOn;
+        if (!isDetailedInteractionEnabled)
+        {
+            canvas.enabled = false;
+        }
+    }
+
+    void displayInfo(string tag, int pointer)
+    {
+        if (tag == "mars")
+        {
+            if (pointer >= 0 && pointer < marsInfoText.Count)
+            {
+                infoBox.text = marsInfoText[pointer];
+            }
+        }
+        else if (tag == "earth2")
+        {
+            if (pointer >= 0 && pointer < earthInfoText.Count)
+            {
+                infoBox.text = earthInfoText[pointer];
+            }
+        }
+    }
+
+    public void nextInfo()
+    {
+        if (isDetailedInteractionEnabled)
+        {
+            if (marsInfoPointer >= 0)
+            {
+                marsInfoPointer++;
+                if (marsInfoPointer >= marsInfoText.Count) marsInfoPointer--;
+                displayInfo("mars", marsInfoPointer);
+            }
+            if (earthInfoPointer >= 0)
+            {
+                earthInfoPointer++;
+                if (earthInfoPointer >= earthInfoText.Count) earthInfoPointer--;
+                displayInfo("earth2", earthInfoPointer);
+            }
+        }
     }
 }
