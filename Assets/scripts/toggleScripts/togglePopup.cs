@@ -8,11 +8,15 @@ public class togglePopup : MonoBehaviour
 {
     public GameObject marsinfo;
     public GameObject earthinfo;
+    public GameObject laptopinfo;
+    public GameObject panelinfo;
+
     public Toggle interactionToggle;
 
     public List<string> marsInfoText = new List<string>(); // used to store the text for the info box
     public List<string> earthInfoText = new List<string>(); // used to store the text for the info box
 
+    public TMP_Text headerText;
     public TMP_Text infoBox;
     public Canvas canvas;
 
@@ -54,6 +58,16 @@ public class togglePopup : MonoBehaviour
                     HandleClick(hit.point, "earth2", earthinfo);
                 }
 
+                if (hit.transform.tag == "laptop")
+                {
+                    HandleClick(hit.point, "laptop", laptopinfo);
+                }                
+                
+                if (hit.transform.tag == "panel")
+                {
+                    HandleClick(hit.point, "panel", panelinfo);
+                }
+
                 if (hit.transform.tag == "marsInfo")
                 {
                     Destroy(hit.transform.gameObject);
@@ -65,6 +79,18 @@ public class togglePopup : MonoBehaviour
                     Destroy(hit.transform.gameObject);
                     activePopups.Remove("earth2");
                 }
+                if (hit.transform.tag == "laptopinfo")
+                {
+                    Destroy(hit.transform.gameObject);
+                    activePopups.Remove("laptop");
+                }
+
+                if (hit.transform.tag == "panelinfo")
+                {
+                    Destroy(hit.transform.gameObject);
+                    activePopups.Remove("panel");
+                }
+
             }
         }
     }
@@ -95,7 +121,7 @@ public class togglePopup : MonoBehaviour
 
         Vector3 pos = hitPoint;
         pos.z += 0.1f;
-        pos.y += 0.25f;
+        pos.y += 0.1f;
         GameObject popup = Instantiate(infoPrefab, pos, transform.rotation);
         activePopups[tag] = popup;
     }
@@ -115,6 +141,7 @@ public class togglePopup : MonoBehaviour
         {
             if (pointer >= 0 && pointer < marsInfoText.Count)
             {
+                headerText.text = "Mars";
                 infoBox.text = marsInfoText[pointer];
             }
         }
@@ -122,6 +149,7 @@ public class togglePopup : MonoBehaviour
         {
             if (pointer >= 0 && pointer < earthInfoText.Count)
             {
+                headerText.text = "Earth";
                 infoBox.text = earthInfoText[pointer];
             }
         }
