@@ -80,3 +80,9 @@ crashlytics-build.properties
 # MacOS
 .DS_Store
 **/.DS_Store
+
+# exclude blender objects folder
+/Assets/blenderObjects/
+
+# exclude prefabs
+/Assets/prefabs/
