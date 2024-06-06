@@ -9,6 +9,11 @@ TagManager:
   - earth2
   - earthInfo
   - marsInfo
+  - panelinfo
+  - laptopinfo
+  - laptop
+  - panel
+  - network
   layers:
   - Default
   - TransparentFX
