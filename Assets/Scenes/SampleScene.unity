@@ -1685,9 +1685,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1798331764}
-        m_TargetAssemblyTypeName: togglePopup, Assembly-CSharp
-        m_MethodName: nextInfo
+      - m_Target: {fileID: 1798331766}
+        m_TargetAssemblyTypeName: ARInteractionManager, Assembly-CSharp
+        m_MethodName: NextInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2152,6 +2152,7 @@ GameObject:
   - component: {fileID: 1798331763}
   - component: {fileID: 1798331764}
   - component: {fileID: 1798331765}
+  - component: {fileID: 1798331766}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -2244,7 +2245,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798331758}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d157c27b7028484a96dc9992946e90d, type: 3}
   m_Name: 
@@ -2277,6 +2278,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fca1b0875874b4a92b418b19522a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1770494380}
+--- !u!114 &1798331766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798331758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f87f6f3d1582647a44834c82ae4136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoDataList:
+  - tag: mars
+    infoPrefab: {fileID: 268910535838176655, guid: e8cf852c9b1e97642aa35ac693d759f5, type: 3}
+    infoTexts:
+    - Mars
+    - Mars2
+    - Mars3
+  - tag: earth2
+    infoPrefab: {fileID: 7407444258486437730, guid: e6e9a80240c68a349a8869bd839e8a53, type: 3}
+    infoTexts:
+    - Earth
+    - Earth2
+    - Earth3
+  - tag: laptop
+    infoPrefab: {fileID: 3777848412965631654, guid: 86bc737723ffd2747b05de727c70fd3d, type: 3}
+    infoTexts:
+    - Laptop
+    - Laptop2
+    - Laptop3
+  - tag: panel
+    infoPrefab: {fileID: 4693977524984080562, guid: 35233490892731b4cb615f13316be8bd, type: 3}
+    infoTexts:
+    - Panel
+    - Panel2
+    - Panel3
+  interactionToggle: {fileID: 1577749885}
+  headerText: {fileID: 186144808}
+  infoBox: {fileID: 1992009761}
   canvas: {fileID: 1770494380}
 --- !u!1 &1828601335
 GameObject:
