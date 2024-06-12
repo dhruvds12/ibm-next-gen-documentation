@@ -28,7 +28,6 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
         trackedImages.trackedImagesChanged -= OnTrackedImagesChanged;
     }
 
-    // Event Handler
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         // Create object based on image tracked
@@ -104,4 +103,16 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
         }
         return Quaternion.identity;
     }
+/*
+    public void ClearAllModels()
+    {
+        foreach (var arObject in arObjectList)
+        {
+            Destroy(arObject);
+        }
+        arObjects.Clear();
+        arObjectList.Clear();
+        isManipulating.Clear();
+        objectRotations.Clear();
+    }*/
 }
