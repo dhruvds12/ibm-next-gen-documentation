@@ -13,7 +13,9 @@ public class EditNotesController : MonoBehaviour
     public float editModeHeight = 1250f; // Height of ScrollView in edit mode
     public float viewModeHeight = 2000f; // Height of ScrollView in view mode
     public float editModePosY = -700f; // Y position of ScrollView in edit mode
-    public float viewModePosY = 1000; // Y position of ScrollView in view mode
+    public float viewModePosY = -1000f; // Y position of ScrollView in view mode
+
+    private FirebaseTextManager firebaseTextManager; // Reference to FirebaseTextManager
 
     private bool isEditMode = false;
 
@@ -29,12 +31,16 @@ public class EditNotesController : MonoBehaviour
         notesScrollRect.content = notesText.GetComponent<RectTransform>();
 
         // Set initial height and position to view mode settings
-        SetScrollViewAnchors(new Vector2(0.5f, 0.5f)); // Center middle for view mode
         SetScrollViewPosition(viewModePosY);
         SetScrollViewHeight(viewModeHeight);
 
-        // Load saved notes
-        LoadNotes();
+        // Load saved notes from Firebase
+        firebaseTextManager = FindObjectOfType<FirebaseTextManager>();
+        if (firebaseTextManager != null)
+        {
+            firebaseTextManager.displayText = notesText.GetComponent<TextMeshProUGUI>();
+            firebaseTextManager.LoadText();
+        }
     }
 
     void ToggleEditMode()
@@ -58,8 +64,7 @@ public class EditNotesController : MonoBehaviour
             // Change button text to "Save"
             editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Save";
 
-            // Set height, position, and anchors to edit mode settings
-            SetScrollViewAnchors(new Vector2(0.5f, 1f)); // Center top for edit mode
+            // Set height and position to edit mode settings
             SetScrollViewPosition(editModePosY);
             SetScrollViewHeight(editModeHeight);
         }
@@ -80,12 +85,14 @@ public class EditNotesController : MonoBehaviour
             // Change button text to "Edit"
             editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Edit";
 
-            // Optionally, save the text to PlayerPrefs or another local storage
-            PlayerPrefs.SetString("UserNotes", inputField.text);
-            PlayerPrefs.Save();
+            // Save the text to Firebase
+            if (firebaseTextManager != null)
+            {
+                firebaseTextManager.inputField = notesInputField.GetComponent<TMP_InputField>();
+                firebaseTextManager.SaveText();
+            }
 
-            // Set height, position, and anchors to view mode settings
-            SetScrollViewAnchors(new Vector2(0.5f, 0.5f)); // Center middle for view mode
+            // Set height and position to view mode settings
             SetScrollViewPosition(viewModePosY);
             SetScrollViewHeight(viewModeHeight);
         }
@@ -112,15 +119,5 @@ public class EditNotesController : MonoBehaviour
         // Adjust the anchors of the ScrollView
         scrollViewRectTransform.anchorMin = anchor;
         scrollViewRectTransform.anchorMax = anchor;
-    }
-
-    void LoadNotes()
-    {
-        // Optionally, load the text from PlayerPrefs or another local storage
-        if (PlayerPrefs.HasKey("UserNotes"))
-        {
-            TextMeshProUGUI text = notesText.GetComponent<TextMeshProUGUI>();
-            text.text = PlayerPrefs.GetString("UserNotes");
-        }
     }
 }

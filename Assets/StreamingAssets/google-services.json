@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "811672755547",
+    "firebase_url": "https://ibm-ar-cb075-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ibm-ar-cb075",
+    "storage_bucket": "ibm-ar-cb075.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811672755547:android:209fcc46e8aebc9fd48e7e",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.IBM_AR"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrrLT1jqB_jO_kCfuq-JqwKs--9urAAkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

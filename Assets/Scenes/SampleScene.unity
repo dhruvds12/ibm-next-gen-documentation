@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -500.60727}
+  m_AnchoredPosition: {x: 0, y: -499.99982}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117005629
@@ -393,76 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Network topology is the arrangement of the elements (links, nodes, etc.)
-    of a communication network.[1][2] Network topology can be used to define or describe
-    the arrangement of various types of telecommunication networks, including command
-    and control radio networks,[3] industrial fieldbusses and computer networks.
-
-    
-
-    Network
-    topology is the topological[4] structure of a network and may be depicted physically
-    or logically. It is an application of graph theory[3] wherein communicating devices
-    are modeled as nodes and the connections between the devices are modeled as links
-    or lines between the nodes. Physical topology is the placement of the various
-    components of a network (e.g., device location and cable installation), while
-    logical topology illustrates how data flows within a network. Distances between
-    nodes, physical interconnections, transmission rates, or signal types may differ
-    between two different networks, yet their logical topologies may be identical.
-    A network''s physical topology is a particular concern of the physical layer
-    of the OSI model.
-
-    
-
-    Examples of network topologies are found in local
-    area networks (LAN), a common computer network installation. Any given node in
-    the LAN has one or more physical links to other devices in the network; graphically
-    mapping these links results in a geometric shape that can be used to describe
-    the physical topology of the network. A wide variety of physical topologies have
-    been used in LANs, including ring, bus, mesh and star. Conversely, mapping the
-    data flow between the components determines the logical topology of the network.
-    In comparison, Controller Area Networks, common in vehicles, are primarily distributed
-    control system networks of one or more controllers interconnected with sensors
-    and actuators over, invariably, a physical bus topology.
-
-    
-
-    Topologies
-
-    
-
-    Diagram
-    of different network topologies
-
-    Two basic categories of network topologies
-    exist, physical topologies and logical topologies.[5]
-
-    
-
-    The transmission
-    medium layout used to link devices is the physical topology of the network. For
-    conductive or fiber optical mediums, this refers to the layout of cabling, the
-    locations of nodes, and the links between the nodes and the cabling.[1] The physical
-    topology of a network is determined by the capabilities of the network access
-    devices and media, the level of control or fault tolerance desired, and the cost
-    associated with cabling or telecommunication circuits.
-
-    
-
-    In contrast,
-    logical topology is the way that the signals act on the network media,[6] or
-    the way that the data passes through the network from one device to the next
-    without regard to the physical interconnection of the devices.[7] A network''s
-    logical topology is not necessarily the same as its physical topology. For example,
-    the original twisted pair Ethernet using repeater hubs was a logical bus topology
-    carried on a physical star topology. Token Ring is a logical ring topology, but
-    is wired as a physical star from the media access unit. Physically, AFDX can
-    be a cascaded star topology of multiple dual redundant Ethernet switches; however,
-    the AFDX Virtual links are modeled as time-switched single-transmitter bus connections,
-    thus following the safety model of a single-transmitter bus topology previously
-    used in aircraft. Logical topologies are often closely associated with media
-    access control methods and protocols. Some networks are able to dynamically change
-    their logical topology through configuration changes to their routers and switches.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1035,8 +966,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1324862788}
   m_HandleRect: {fileID: 1324862787}
   m_Direction: 2
-  m_Value: 0.500449
-  m_Size: 0.59652525
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3849,7 +3780,7 @@ MonoBehaviour:
     the arrangement of various types of telecommunication networks, including command
     and control radio networks,[3] industrial fieldbusses and computer networks.
 
-    
+
 
     Network
     topology is the topological[4] structure of a network and may be depicted physically
@@ -3863,11 +3794,11 @@ MonoBehaviour:
     A network''s physical topology is a particular concern of the physical layer
     of the OSI model.
 
-    
 
-    Examples of network topologies are found in local
-    area networks (LAN), a common computer network installation. Any given node in
-    the LAN has one or more physical links to other devices in the network; graphically
+
+    Examples of network topologies are found in local area
+    networks (LAN), a common computer network installation. Any given node in the
+    LAN has one or more physical links to other devices in the network; graphically
     mapping these links results in a geometric shape that can be used to describe
     the physical topology of the network. A wide variety of physical topologies have
     been used in LANs, including ring, bus, mesh and star. Conversely, mapping the
@@ -3876,11 +3807,11 @@ MonoBehaviour:
     control system networks of one or more controllers interconnected with sensors
     and actuators over, invariably, a physical bus topology.
 
-    
+
 
     Topologies
 
-    
+
 
     Diagram
     of different network topologies
@@ -3888,7 +3819,7 @@ MonoBehaviour:
     Two basic categories of network topologies
     exist, physical topologies and logical topologies.[5]
 
-    
+
 
     The transmission
     medium layout used to link devices is the physical topology of the network. For
@@ -3898,14 +3829,14 @@ MonoBehaviour:
     devices and media, the level of control or fault tolerance desired, and the cost
     associated with cabling or telecommunication circuits.
 
-    
 
-    In contrast,
-    logical topology is the way that the signals act on the network media,[6] or
-    the way that the data passes through the network from one device to the next
-    without regard to the physical interconnection of the devices.[7] A network''s
-    logical topology is not necessarily the same as its physical topology. For example,
-    the original twisted pair Ethernet using repeater hubs was a logical bus topology
+
+    In contrast, logical
+    topology is the way that the signals act on the network media,[6] or the way
+    that the data passes through the network from one device to the next without
+    regard to the physical interconnection of the devices.[7] A network''s logical
+    topology is not necessarily the same as its physical topology. For example, the
+    original twisted pair Ethernet using repeater hubs was a logical bus topology
     carried on a physical star topology. Token Ring is a logical ring topology, but
     is wired as a physical star from the media access unit. Physically, AFDX can
     be a cascaded star topology of multiple dual redundant Ethernet switches; however,
@@ -4895,7 +4826,7 @@ MonoBehaviour:
     the arrangement of various types of telecommunication networks, including command
     and control radio networks,[3] industrial fieldbusses and computer networks.
 
-    
+
 
     Network
     topology is the topological[4] structure of a network and may be depicted physically
@@ -4909,11 +4840,11 @@ MonoBehaviour:
     A network''s physical topology is a particular concern of the physical layer
     of the OSI model.
 
-    
 
-    Examples of network topologies are found in local
-    area networks (LAN), a common computer network installation. Any given node in
-    the LAN has one or more physical links to other devices in the network; graphically
+
+    Examples of network topologies are found in local area
+    networks (LAN), a common computer network installation. Any given node in the
+    LAN has one or more physical links to other devices in the network; graphically
     mapping these links results in a geometric shape that can be used to describe
     the physical topology of the network. A wide variety of physical topologies have
     been used in LANs, including ring, bus, mesh and star. Conversely, mapping the
@@ -4922,11 +4853,11 @@ MonoBehaviour:
     control system networks of one or more controllers interconnected with sensors
     and actuators over, invariably, a physical bus topology.
 
-    
+
 
     Topologies
 
-    
+
 
     Diagram
     of different network topologies
@@ -4934,7 +4865,7 @@ MonoBehaviour:
     Two basic categories of network topologies
     exist, physical topologies and logical topologies.[5]
 
-    
+
 
     The transmission
     medium layout used to link devices is the physical topology of the network. For
@@ -4944,14 +4875,14 @@ MonoBehaviour:
     devices and media, the level of control or fault tolerance desired, and the cost
     associated with cabling or telecommunication circuits.
 
-    
 
-    In contrast,
-    logical topology is the way that the signals act on the network media,[6] or
-    the way that the data passes through the network from one device to the next
-    without regard to the physical interconnection of the devices.[7] A network''s
-    logical topology is not necessarily the same as its physical topology. For example,
-    the original twisted pair Ethernet using repeater hubs was a logical bus topology
+
+    In contrast, logical
+    topology is the way that the signals act on the network media,[6] or the way
+    that the data passes through the network from one device to the next without
+    regard to the physical interconnection of the devices.[7] A network''s logical
+    topology is not necessarily the same as its physical topology. For example, the
+    original twisted pair Ethernet using repeater hubs was a logical bus topology
     carried on a physical star topology. Token Ring is a logical ring topology, but
     is wired as a physical star from the media access unit. Physically, AFDX can
     be a cascaded star topology of multiple dual redundant Ethernet switches; however,
@@ -5050,6 +4981,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1 &1720224047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720224049}
+  - component: {fileID: 1720224050}
+  m_Layer: 0
+  m_Name: FirebaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1720224049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720224047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1051.5, y: 582.6036, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720224050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720224047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a065f355a9f6d14b859d1796dcc7225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770494377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,10 +5571,10 @@ RectTransform:
   - {fileID: 220681405}
   m_Father: {fileID: 395637719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 2000}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1080}
+  m_SizeDelta: {x: 1000, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852822863
 MonoBehaviour:
@@ -5898,3 +5873,4 @@ SceneRoots:
   - {fileID: 223974230}
   - {fileID: 782628378}
   - {fileID: 1284868599}
+  - {fileID: 1720224049}
