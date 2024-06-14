@@ -5,8 +5,7 @@ using TMPro;
 
 public class ApiManager : MonoBehaviour
 {
-    // TODO set up DDNS for AWS EC2 instance
-    // Replace with AWS EC2 instance public IP (changes on every start)
+    // url to ddns
     private string baseUrl = "aws-server.ddns.net:3000";
 
     public TMP_InputField inputField;
@@ -15,6 +14,8 @@ public class ApiManager : MonoBehaviour
     void Start()
     {
         // Load existing notes on start
+        // Using coroutine to wait for the response from the server
+        // Coroutine is a function that can pause its execution and return control to Unity but then continue where it left off on the following frame
         StartCoroutine(GetNotes());
     }
 
@@ -61,6 +62,8 @@ public class ApiManager : MonoBehaviour
                 Debug.Log("Notes received: " + webRequest.downloadHandler.text);
                 Note[] notes = JsonUtility.FromJson<NoteArray>("{\"notes\":" + webRequest.downloadHandler.text + "}").notes;
 
+                // TODO update this to handle multiple notes 
+                // TODO reponse will change when server properly implemented
                 // Assuming only one note for simplicity
                 if (notes.Length > 0)
                 {
