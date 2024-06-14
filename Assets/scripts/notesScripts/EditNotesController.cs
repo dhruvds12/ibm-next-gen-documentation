@@ -15,7 +15,7 @@ public class EditNotesController : MonoBehaviour
     public float editModePosY = -700f; // Y position of ScrollView in edit mode
     public float viewModePosY = -1000f; // Y position of ScrollView in view mode
 
-    private FirebaseTextManager firebaseTextManager; // Reference to FirebaseTextManager
+    private ApiManager apiManager; // Reference to ApiManager
 
     private bool isEditMode = false;
 
@@ -34,12 +34,13 @@ public class EditNotesController : MonoBehaviour
         SetScrollViewPosition(viewModePosY);
         SetScrollViewHeight(viewModeHeight);
 
-        // Load saved notes from Firebase
-        firebaseTextManager = FindObjectOfType<FirebaseTextManager>();
-        if (firebaseTextManager != null)
+        // Load saved notes from server
+        apiManager = FindObjectOfType<ApiManager>();
+        if (apiManager != null)
         {
-            firebaseTextManager.displayText = notesText.GetComponent<TextMeshProUGUI>();
-            firebaseTextManager.LoadText();
+            apiManager.displayText = notesText.GetComponent<TextMeshProUGUI>();
+            apiManager.inputField = notesInputField.GetComponent<TMP_InputField>();
+            StartCoroutine(apiManager.GetNotes());
         }
     }
 
@@ -85,11 +86,10 @@ public class EditNotesController : MonoBehaviour
             // Change button text to "Edit"
             editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Edit";
 
-            // Save the text to Firebase
-            if (firebaseTextManager != null)
+            // Save the text to server
+            if (apiManager != null)
             {
-                firebaseTextManager.inputField = notesInputField.GetComponent<TMP_InputField>();
-                firebaseTextManager.SaveText();
+                StartCoroutine(apiManager.CreateOrUpdateNote());
             }
 
             // Set height and position to view mode settings
@@ -112,12 +112,5 @@ public class EditNotesController : MonoBehaviour
         Vector2 anchoredPosition = scrollViewRectTransform.anchoredPosition;
         anchoredPosition.y = posY;
         scrollViewRectTransform.anchoredPosition = anchoredPosition;
-    }
-
-    void SetScrollViewAnchors(Vector2 anchor)
-    {
-        // Adjust the anchors of the ScrollView
-        scrollViewRectTransform.anchorMin = anchor;
-        scrollViewRectTransform.anchorMax = anchor;
     }
 }

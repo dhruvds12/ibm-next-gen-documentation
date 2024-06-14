@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -499.99982}
+  m_AnchoredPosition: {x: 0, y: -497.67496}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117005629
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1324862787}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.90582275
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4981,6 +4981,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1 &1640859302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640859304}
+  - component: {fileID: 1640859303}
+  m_Layer: 0
+  m_Name: AwsApiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1640859303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640859302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11fc06e1e3e8f8498938d508fe18dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 1300305930}
+  displayText: {fileID: 117005629}
+--- !u!4 &1640859304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640859302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.62050855, y: 0.035321094, z: -0.13211472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1720224047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4990,7 +5036,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1720224049}
-  - component: {fileID: 1720224050}
   m_Layer: 0
   m_Name: FirebaseManager
   m_TagString: Untagged
@@ -5013,18 +5058,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1720224050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720224047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a065f355a9f6d14b859d1796dcc7225, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1770494377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5874,3 +5907,4 @@ SceneRoots:
   - {fileID: 782628378}
   - {fileID: 1284868599}
   - {fileID: 1720224049}
+  - {fileID: 1640859304}
