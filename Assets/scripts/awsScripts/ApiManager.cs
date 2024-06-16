@@ -1,90 +1,95 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using TMPro;
 
 public class ApiManager : MonoBehaviour
 {
-    // url to ddns
-    private string baseUrl = "aws-server.ddns.net:3000";
 
-    public TMP_InputField inputField;
-    public TextMeshProUGUI displayText;
+    // TODO change to https for added security
+    // TODO change the player settings to disallow http requests
+    private const string BaseUrl = "http://aws-server.ddns.net:3000";
 
-    void Start()
+    public IEnumerator PostNote(string userId, string noteKey, string noteContent)
     {
-        // Load existing notes on start
-        // Using coroutine to wait for the response from the server
-        // Coroutine is a function that can pause its execution and return control to Unity but then continue where it left off on the following frame
-        StartCoroutine(GetNotes());
-    }
+        string url = $"{BaseUrl}/notes";
+        
+        PostData postData = new PostData(userId, noteKey, noteContent);
 
-    public IEnumerator CreateOrUpdateNote()
-    {
-        string url = $"{baseUrl}/notes";
-        Note note = new Note { title = "My Note", content = inputField.text };
-        string jsonData = JsonUtility.ToJson(note);
+        Debug.Log("Sending data to server...");
+        Debug.Log("postData: " + postData);
 
-        using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))
+        string jsonData = JsonUtility.ToJson(postData);
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            webRequest.downloadHandler = new DownloadHandlerBuffer();
-            webRequest.SetRequestHeader("Content-Type", "application/json");
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
 
-            yield return webRequest.SendWebRequest();
+            yield return request.SendWebRequest();
 
-            if (webRequest.result != UnityWebRequest.Result.Success)
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogError("Error: " + webRequest.error);
+                Debug.LogError("Error: " + request.error);
             }
             else
             {
-                Debug.Log("Note saved successfully: " + webRequest.downloadHandler.text);
+                Debug.Log("Response: " + request.downloadHandler.text);
             }
         }
     }
 
-    public IEnumerator GetNotes()
+    public IEnumerator GetNote(string userId, string noteKey, System.Action<string> callback)
     {
-        string url = $"{baseUrl}/notes";
+        string url = $"{BaseUrl}/notes/{userId}/{noteKey}";
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
-            yield return webRequest.SendWebRequest();
+            yield return request.SendWebRequest();
 
-            if (webRequest.result != UnityWebRequest.Result.Success)
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogError("Error: " + webRequest.error);
+                Debug.LogError("Error: " + request.error);
             }
             else
             {
-                Debug.Log("Notes received: " + webRequest.downloadHandler.text);
-                Note[] notes = JsonUtility.FromJson<NoteArray>("{\"notes\":" + webRequest.downloadHandler.text + "}").notes;
+                Debug.Log("Response: " + request.downloadHandler.text);
 
-                // TODO update this to handle multiple notes 
-                // TODO reponse will change when server properly implemented
-                // Assuming only one note for simplicity
-                if (notes.Length > 0)
+                // Deserialize the JSON response
+                NoteResponse noteResponse = JsonUtility.FromJson<NoteResponse>(request.downloadHandler.text);
+                if (noteResponse != null && noteResponse.noteContent != null)
                 {
-                    Note note = notes[0];
-                    displayText.text = note.content;
-                    inputField.text = note.content;
+                    callback?.Invoke(noteResponse.noteContent);
+                }
+                else
+                {
+                    Debug.LogError("Invalid response format.");
                 }
             }
         }
     }
 }
 
-[System.Serializable]
-public class Note
-{
-    public string title;
-    public string content;
-}
 
 [System.Serializable]
-public class NoteArray
+public class NoteResponse
 {
-    public Note[] notes;
+    public string noteContent;
+}
+
+
+[System.Serializable]
+public class PostData
+{
+    public string userId;
+    public string noteKey;
+    public string noteContent;
+
+    public PostData(string userId, string noteKey, string noteContent)
+    {
+        this.userId = userId;
+        this.noteKey = noteKey;
+        this.noteContent = noteContent;
+    }
 }

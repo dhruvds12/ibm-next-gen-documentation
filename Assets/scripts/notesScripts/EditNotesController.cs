@@ -19,6 +19,9 @@ public class EditNotesController : MonoBehaviour
 
     private bool isEditMode = false;
 
+    private const string userId = "1234"; // Hardcoded userId
+    private const string noteKey = "general_note"; // Hardcoded noteKey
+
     void Start()
     {
         // Initially set the input field to inactive
@@ -38,9 +41,7 @@ public class EditNotesController : MonoBehaviour
         apiManager = FindObjectOfType<ApiManager>();
         if (apiManager != null)
         {
-            apiManager.displayText = notesText.GetComponent<TextMeshProUGUI>();
-            apiManager.inputField = notesInputField.GetComponent<TMP_InputField>();
-            StartCoroutine(apiManager.GetNotes());
+            StartCoroutine(apiManager.GetNote(userId, noteKey, OnNoteLoaded));
         }
     }
 
@@ -89,7 +90,7 @@ public class EditNotesController : MonoBehaviour
             // Save the text to server
             if (apiManager != null)
             {
-                StartCoroutine(apiManager.CreateOrUpdateNote());
+                StartCoroutine(apiManager.PostNote(userId, noteKey, inputField.text));
             }
 
             // Set height and position to view mode settings
@@ -112,5 +113,11 @@ public class EditNotesController : MonoBehaviour
         Vector2 anchoredPosition = scrollViewRectTransform.anchoredPosition;
         anchoredPosition.y = posY;
         scrollViewRectTransform.anchoredPosition = anchoredPosition;
+    }
+
+    void OnNoteLoaded(string noteContent)
+    {
+        TextMeshProUGUI text = notesText.GetComponent<TextMeshProUGUI>();
+        text.text = noteContent;
     }
 }
