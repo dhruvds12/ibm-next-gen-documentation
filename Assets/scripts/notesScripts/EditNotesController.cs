@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class EditNotesController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class EditNotesController : MonoBehaviour
 
     private const string userId = "1234"; // Hardcoded userId
     private const string noteKey = "general_note"; // Hardcoded noteKey
+    private const string imageName = "image1"; // Hardcoded imageName
 
     void Start()
     {
@@ -41,7 +43,9 @@ public class EditNotesController : MonoBehaviour
         apiManager = FindObjectOfType<ApiManager>();
         if (apiManager != null)
         {
-            StartCoroutine(apiManager.GetNote(userId, noteKey, OnNoteLoaded));
+            StartCoroutine(apiManager.GetNote(userId, imageName, noteKey, OnNoteLoaded));
+            // Fetch shared notes
+            //StartCoroutine(apiManager.GetSharedNotes(userId, imageName, OnSharedNotesLoaded));
         }
     }
 
@@ -90,7 +94,7 @@ public class EditNotesController : MonoBehaviour
             // Save the text to server
             if (apiManager != null)
             {
-                StartCoroutine(apiManager.PostNote(userId, noteKey, inputField.text));
+                StartCoroutine(apiManager.PostNote(userId, imageName, noteKey, inputField.text));
             }
 
             // Set height and position to view mode settings
@@ -119,5 +123,16 @@ public class EditNotesController : MonoBehaviour
     {
         TextMeshProUGUI text = notesText.GetComponent<TextMeshProUGUI>();
         text.text = noteContent;
+    }
+
+    void OnSharedNotesLoaded(List<ApiManager.Note> sharedNotes)
+    {
+        foreach (var note in sharedNotes)
+        {
+            foreach (var kvp in note.notes)
+            {
+                Debug.Log($"Shared Note from {note.userId}: {kvp.Key} - {kvp.Value}");
+            }
+        }
     }
 }
