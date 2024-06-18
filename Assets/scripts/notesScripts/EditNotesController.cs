@@ -21,7 +21,7 @@ public class EditNotesController : MonoBehaviour
 
     private bool isEditMode = false;
 
-    private const string userId = "5678"; // Hardcoded userId
+    private const string userId = "8e005a538ebadc51ac94cf080ca3d5ba"; // Hardcoded userId
     private const string noteKey = "general_note"; // Hardcoded noteKey
     private const string imageName = "image1"; // Hardcoded imageName
 
@@ -45,6 +45,7 @@ public class EditNotesController : MonoBehaviour
         SetScrollViewPosition(viewModePosY);
         SetScrollViewHeight(viewModeHeight);
 
+        EnsureMyNotesOption();
         // Load saved notes from server
         apiManager = FindObjectOfType<ApiManager>();
         if (apiManager != null)
@@ -53,6 +54,7 @@ public class EditNotesController : MonoBehaviour
             // Fetch shared notes
             StartCoroutine(apiManager.GetSharedNotes(userId, imageName, noteKey, OnSharedNotesLoaded));
         }
+
     }
 
     void ToggleEditMode()
@@ -133,7 +135,7 @@ public class EditNotesController : MonoBehaviour
         editButton.gameObject.SetActive(true); // Show the edit button when "My Notes" is loaded
     }
 
-    void OnSharedNotesLoaded(List<string> sharedUsers)
+    void OnSharedNotesLoaded(List<ApiManager.User> sharedUsers)
     {
         Debug.Log("OnSharedNotesLoaded called");
         if (sharedUsers == null || sharedUsers.Count == 0)
@@ -142,14 +144,25 @@ public class EditNotesController : MonoBehaviour
             return;
         }
 
-        foreach (var sharedUserId in sharedUsers)
+        foreach (var sharedUser in sharedUsers)
         {
-            StartCoroutine(apiManager.GetNote(sharedUserId, imageName, noteKey, noteContent =>
+            StartCoroutine(apiManager.GetNote(sharedUser.userId, imageName, noteKey, noteContent =>
             {
-                string noteKey = $"{sharedUserId}'s Notes";
+                string noteKey = $"{sharedUser.username}'s Notes";
                 allNotes[noteKey] = noteContent;
                 UpdateDropdownOptions();
             }));
+        }
+    }
+
+    void EnsureMyNotesOption()
+    {
+        if (!allNotes.ContainsKey("My Notes"))
+        {
+            allNotes["My Notes"] = string.Empty; // Initialize with an empty string if no notes exist
+            UpdateDropdownOptions();
+            SetNotesText(string.Empty);
+            editButton.gameObject.SetActive(true); // Show the edit button
         }
     }
 
