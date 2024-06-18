@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class ApiManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class ApiManager : MonoBehaviour
             noteContent = noteContent
         };
 
-        string jsonData = JsonUtility.ToJson(postData);
+        string jsonData = JsonConvert.SerializeObject(postData);
 
         using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
@@ -55,15 +56,15 @@ public class ApiManager : MonoBehaviour
             else
             {
                 Debug.Log("Response: " + request.downloadHandler.text);
-                var note = JsonUtility.FromJson<NoteResponse>(request.downloadHandler.text);
+                var note = JsonConvert.DeserializeObject<NoteResponse>(request.downloadHandler.text);
                 callback?.Invoke(note.noteContent);
             }
         }
     }
 
-    public IEnumerator GetSharedNotes(string userId, string imageName, System.Action<List<Note>> callback)
+    public IEnumerator GetSharedNotes(string userId, string imageName, string noteKey, System.Action<List<string>> callback)
     {
-        string url = $"{BaseUrl}/sharedNotes/{userId}/{imageName}";
+        string url = $"{BaseUrl}/sharedNotes/{userId}/{imageName}/{noteKey}";
 
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
@@ -76,8 +77,8 @@ public class ApiManager : MonoBehaviour
             else
             {
                 Debug.Log("Response: " + request.downloadHandler.text);
-                var sharedNotes = JsonUtility.FromJson<SharedNotesResponse>("{\"notes\":" + request.downloadHandler.text + "}");
-                callback?.Invoke(sharedNotes.notes);
+                var sharedNotes = JsonConvert.DeserializeObject<List<string>>(request.downloadHandler.text);
+                callback?.Invoke(sharedNotes);
             }
         }
     }
@@ -93,7 +94,7 @@ public class ApiManager : MonoBehaviour
             shareWithUserId = shareWithUserId
         };
 
-        string jsonData = JsonUtility.ToJson(postData);
+        string jsonData = JsonConvert.SerializeObject(postData);
 
         using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
@@ -122,19 +123,6 @@ public class ApiManager : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Note
-    {
-        public string userId;
-        public Dictionary<string, string> notes;
-    }
-
-    [System.Serializable]
-    public class SharedNotesResponse
-    {
-        public List<Note> notes;
-    }
-
-    [System.Serializable]
     public class PostNoteData
     {
         public string userId;
@@ -151,5 +139,4 @@ public class ApiManager : MonoBehaviour
         public string noteKey;
         public string shareWithUserId;
     }
-
 }

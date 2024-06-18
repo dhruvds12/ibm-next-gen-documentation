@@ -9,6 +9,7 @@ public class EditNotesController : MonoBehaviour
     public GameObject notesInputField; // Reference to the TMP_InputField object
     public Button editButton; // Reference to the Edit button
     public ScrollRect notesScrollRect; // Reference to the ScrollRect
+    public TMP_Dropdown notesDropdown; // Reference to the TMP_Dropdown object
 
     public RectTransform scrollViewRectTransform; // Reference to the ScrollView RectTransform
     public float editModeHeight = 1250f; // Height of ScrollView in edit mode
@@ -20,9 +21,11 @@ public class EditNotesController : MonoBehaviour
 
     private bool isEditMode = false;
 
-    private const string userId = "1234"; // Hardcoded userId
+    private const string userId = "5678"; // Hardcoded userId
     private const string noteKey = "general_note"; // Hardcoded noteKey
     private const string imageName = "image1"; // Hardcoded imageName
+
+    private Dictionary<string, string> allNotes = new Dictionary<string, string>();
 
     void Start()
     {
@@ -31,6 +34,9 @@ public class EditNotesController : MonoBehaviour
 
         // Add listener to the edit button
         editButton.onClick.AddListener(ToggleEditMode);
+
+        // Add listener to the dropdown
+        notesDropdown.onValueChanged.AddListener(delegate { OnDropdownValueChanged(); });
 
         // Set initial ScrollRect content to NotesText
         notesScrollRect.content = notesText.GetComponent<RectTransform>();
@@ -45,7 +51,7 @@ public class EditNotesController : MonoBehaviour
         {
             StartCoroutine(apiManager.GetNote(userId, imageName, noteKey, OnNoteLoaded));
             // Fetch shared notes
-            //StartCoroutine(apiManager.GetSharedNotes(userId, imageName, OnSharedNotesLoaded));
+            StartCoroutine(apiManager.GetSharedNotes(userId, imageName, noteKey, OnSharedNotesLoaded));
         }
     }
 
@@ -121,18 +127,63 @@ public class EditNotesController : MonoBehaviour
 
     void OnNoteLoaded(string noteContent)
     {
-        TextMeshProUGUI text = notesText.GetComponent<TextMeshProUGUI>();
-        text.text = noteContent;
+        allNotes["My Notes"] = noteContent;
+        UpdateDropdownOptions();
+        SetNotesText(noteContent);
+        editButton.gameObject.SetActive(true); // Show the edit button when "My Notes" is loaded
     }
 
-    void OnSharedNotesLoaded(List<ApiManager.Note> sharedNotes)
+    void OnSharedNotesLoaded(List<string> sharedUsers)
     {
-        foreach (var note in sharedNotes)
+        Debug.Log("OnSharedNotesLoaded called");
+        if (sharedUsers == null || sharedUsers.Count == 0)
         {
-            foreach (var kvp in note.notes)
-            {
-                Debug.Log($"Shared Note from {note.userId}: {kvp.Key} - {kvp.Value}");
-            }
+            Debug.LogError("No shared notes found");
+            return;
         }
+
+        foreach (var sharedUserId in sharedUsers)
+        {
+            StartCoroutine(apiManager.GetNote(sharedUserId, imageName, noteKey, noteContent =>
+            {
+                string noteKey = $"{sharedUserId}'s Notes";
+                allNotes[noteKey] = noteContent;
+                UpdateDropdownOptions();
+            }));
+        }
+    }
+
+    void UpdateDropdownOptions()
+    {
+        notesDropdown.options.Clear();
+
+        foreach (var noteKey in allNotes.Keys)
+        {
+            notesDropdown.options.Add(new TMP_Dropdown.OptionData(noteKey));
+        }
+
+        notesDropdown.value = 0; // Default to the first note
+        notesDropdown.RefreshShownValue();
+        OnDropdownValueChanged(); // Ensure the default selection is displayed
+    }
+
+    void OnDropdownValueChanged()
+    {
+        string selectedNoteKey = notesDropdown.options[notesDropdown.value].text;
+        if (allNotes.TryGetValue(selectedNoteKey, out string noteContent))
+        {
+            SetNotesText(noteContent);
+            editButton.gameObject.SetActive(selectedNoteKey == "My Notes"); // Show/hide edit button based on selection
+        }
+        else
+        {
+            Debug.LogError("Selected note not found in allNotes dictionary");
+        }
+    }
+
+    void SetNotesText(string noteContent)
+    {
+        TextMeshProUGUI text = notesText.GetComponent<TextMeshProUGUI>();
+        text.text = noteContent;
     }
 }
