@@ -21,7 +21,7 @@ public class EditNotesController : MonoBehaviour
 
     private bool isEditMode = false;
 
-    private const string userId = "8e005a538ebadc51ac94cf080ca3d5ba"; // Hardcoded userId
+    private string userId; // logged in userId
     private const string noteKey = "general_note"; // Hardcoded noteKey
     private const string imageName = "image1"; // Hardcoded imageName
 
@@ -29,6 +29,14 @@ public class EditNotesController : MonoBehaviour
 
     void Start()
     {
+
+        userId = PlayerPrefs.GetString("userId", null); // Initialize userId in Start
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID not found. Please log in.");
+            return; // Prevent further execution if userId is not set
+        }
+
         // Initially set the input field to inactive
         notesInputField.SetActive(false);
 

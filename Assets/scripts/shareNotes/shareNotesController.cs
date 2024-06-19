@@ -10,10 +10,18 @@ public class ShareNoteController : MonoBehaviour
     public Transform userListContent; // Reference to the Scroll View Content
     public GameObject userButtonPrefab; // Reference to the Button prefab for users
 
+    private string userId; // logged in userId
     private ApiManager apiManager;
 
     void Start()
     {
+        userId = PlayerPrefs.GetString("userId", null); // Initialize userId in Start
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID not found. Please log in.");
+            return; // Prevent further execution if userId is not set
+        }
+
         shareButton.onClick.AddListener(OpenUserListPopup);
         apiManager = FindObjectOfType<ApiManager>();
         userListPopup.SetActive(false);
@@ -36,7 +44,7 @@ public class ShareNoteController : MonoBehaviour
         // Populate the user list with buttons
         foreach (var user in users)
         {
-            if (user.userId == "8e005a538ebadc51ac94cf080ca3d5ba") // Skip the current user
+            if (user.userId == userId) // Skip the current user
                 continue;
 
             GameObject userButton = Instantiate(userButtonPrefab, userListContent);
@@ -46,9 +54,9 @@ public class ShareNoteController : MonoBehaviour
         }
     }
 
-    void ShareNoteWithUser(string userId)
+    void ShareNoteWithUser(string targetUserId)
     {
-        StartCoroutine(apiManager.ShareNote("8e005a538ebadc51ac94cf080ca3d5ba", "image1", "general_note", userId));
+        StartCoroutine(apiManager.ShareNote(userId, "image1", "general_note", targetUserId));
         //userListPopup.SetActive(false); // Close the popup after sharing
     }
 }
