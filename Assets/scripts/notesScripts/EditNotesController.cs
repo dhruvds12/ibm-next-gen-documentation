@@ -57,6 +57,21 @@ public class EditNotesController : MonoBehaviour
 
     }
 
+    public void updateOnButtonPress()
+    {
+        // Load saved notes from server
+        apiManager = FindObjectOfType<ApiManager>();
+        if (apiManager != null)
+        {
+            // Should not need to get note again as it is already loaded
+            //StartCoroutine(apiManager.GetNote(userId, imageName, noteKey, OnNoteLoaded));
+
+
+            // Need to get shared notes again as they may have changed since last access
+            StartCoroutine(apiManager.GetSharedNotes(userId, imageName, noteKey, OnSharedNotesLoaded));
+        }
+    }
+
     void ToggleEditMode()
     {
         isEditMode = !isEditMode;

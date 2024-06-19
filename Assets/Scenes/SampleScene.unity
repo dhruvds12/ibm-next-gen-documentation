@@ -5631,6 +5631,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 395637722}
+        m_TargetAssemblyTypeName: EditNotesController, Assembly-CSharp
+        m_MethodName: updateOnButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1444687225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7206,7 +7218,7 @@ MonoBehaviour:
   userListPopup: {fileID: 1486299952}
   shareButton: {fileID: 11535721}
   userListContent: {fileID: 1050060212}
-  userButtonPrefab: {fileID: 8254746754482465680, guid: 77b2f8773068c16459ebccdbfdba29af, type: 3}
+  userButtonPrefab: {fileID: 4357162085174386980, guid: 486f0b6c0b41787449a02056b6c34a15, type: 3}
 --- !u!114 &1794092815
 MonoBehaviour:
   m_ObjectHideFlags: 0
