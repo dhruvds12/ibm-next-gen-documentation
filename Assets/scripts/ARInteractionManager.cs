@@ -19,6 +19,8 @@ public class ARInteractionManager : MonoBehaviour
     public TMP_Text headerText;
     public TMP_Text infoBox;
     public Canvas canvas;
+    public Button previousButton; // Reference to the Previous Button
+    public Button nextButton; // Reference to the Next Button
 
     private bool isDetailedInteractionEnabled;
     private Dictionary<string, GameObject> activePopups = new Dictionary<string, GameObject>();
@@ -40,6 +42,12 @@ public class ARInteractionManager : MonoBehaviour
             infoTextsDict[infoData.tag] = infoData.infoTexts;
             infoPointers[infoData.tag] = -1;
         }
+
+        previousButton.gameObject.SetActive(false); // Hide previous button initially
+        nextButton.gameObject.SetActive(false); // Hide next button initially
+
+        previousButton.onClick.AddListener(PreviousInfo);
+        nextButton.onClick.AddListener(NextInfo);
     }
 
     // Update is called once per frame
@@ -67,6 +75,7 @@ public class ARInteractionManager : MonoBehaviour
                 canvas.enabled = true;
                 infoPointers[tag] = 0;
                 DisplayInfo(tag, infoPointers[tag]);
+                UpdateButtonStates(tag);
             }
             else
             {
@@ -130,8 +139,31 @@ public class ARInteractionManager : MonoBehaviour
                     infoPointers[tag]++;
                     if (infoPointers[tag] >= infoTextsDict[tag].Count) infoPointers[tag]--;
                     DisplayInfo(tag, infoPointers[tag]);
+                    UpdateButtonStates(tag);
                 }
             }
         }
+    }
+
+    public void PreviousInfo()
+    {
+        if (isDetailedInteractionEnabled)
+        {
+            foreach (var tag in infoPointers.Keys)
+            {
+                if (infoPointers[tag] > 0)
+                {
+                    infoPointers[tag]--;
+                    DisplayInfo(tag, infoPointers[tag]);
+                    UpdateButtonStates(tag);
+                }
+            }
+        }
+    }
+
+    void UpdateButtonStates(string tag)
+    {
+        previousButton.gameObject.SetActive(infoPointers[tag] > 0);
+        nextButton.gameObject.SetActive(infoPointers[tag] < infoTextsDict[tag].Count - 1);
     }
 }
