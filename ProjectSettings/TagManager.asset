@@ -16,6 +16,22 @@ TagManager:
   - network
   - marsinfo
   - earth2info
+  - cloud
+  - modem
+  - firewall
+  - switch
+  - router
+  - server
+  - wirelesslaptop
+  - networkDiagram
+  - firewallinfo
+  - modeminfo
+  - cloudinfo
+  - webserviceinfo
+  - routerinfo
+  - switchinfo
+  - serverinfo
+  - wirelesslaptopinfo
   layers:
   - Default
   - TransparentFX

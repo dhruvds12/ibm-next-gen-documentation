@@ -49,7 +49,8 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
             }
         }
 
-        // Update tracking position
+        // Commented out code for updating tracking position
+        /*
         foreach (var trackedImage in eventArgs.updated)
         {
             if (arObjects.ContainsKey(trackedImage.referenceImage.name) && !isManipulating[trackedImage.referenceImage.name])
@@ -60,8 +61,10 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
                 arObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
             }
         }
+        */
 
-        // Handle removed images
+        // Commented out code for handling removed images
+        /*
         foreach (var trackedImage in eventArgs.removed)
         {
             if (arObjects.ContainsKey(trackedImage.referenceImage.name))
@@ -74,6 +77,7 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
                 objectRotations.Remove(trackedImage.referenceImage.name); // Remove rotation state
             }
         }
+        */
     }
 
     // Methods to set manipulation state
@@ -103,7 +107,9 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
         }
         return Quaternion.identity;
     }
-/*
+
+    // Uncomment and use this method if you want to clear all models manually
+    /*
     public void ClearAllModels()
     {
         foreach (var arObject in arObjectList)
@@ -114,5 +120,6 @@ public class ImageTrackerWithObjectManipulation : MonoBehaviour
         arObjectList.Clear();
         isManipulating.Clear();
         objectRotations.Clear();
-    }*/
+    }
+    */
 }
