@@ -26,6 +26,7 @@ public class ARInteractionManager : MonoBehaviour
     private Dictionary<string, GameObject> activePopups = new Dictionary<string, GameObject>();
     private Dictionary<string, List<string>> infoTextsDict = new Dictionary<string, List<string>>();
     private Dictionary<string, int> infoPointers = new Dictionary<string, int>();
+    private string currentTag; // Variable to store the current tag
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,7 @@ public class ARInteractionManager : MonoBehaviour
         {
             if (isDetailedInteractionEnabled)
             {
+                currentTag = tag; // Set the current tag
                 canvas.enabled = true;
                 infoPointers[tag] = 0;
                 DisplayInfo(tag, infoPointers[tag]);
@@ -130,40 +132,37 @@ public class ARInteractionManager : MonoBehaviour
 
     public void NextInfo()
     {
-        if (isDetailedInteractionEnabled)
+        if (isDetailedInteractionEnabled && currentTag != null && infoPointers.ContainsKey(currentTag))
         {
-            foreach (var tag in infoPointers.Keys)
+            if (infoPointers[currentTag] >= 0)
             {
-                if (infoPointers[tag] >= 0)
-                {
-                    infoPointers[tag]++;
-                    if (infoPointers[tag] >= infoTextsDict[tag].Count) infoPointers[tag]--;
-                    DisplayInfo(tag, infoPointers[tag]);
-                    UpdateButtonStates(tag);
-                }
+                infoPointers[currentTag]++;
+                if (infoPointers[currentTag] >= infoTextsDict[currentTag].Count) infoPointers[currentTag]--;
+                DisplayInfo(currentTag, infoPointers[currentTag]);
+                UpdateButtonStates(currentTag);
             }
         }
     }
 
     public void PreviousInfo()
     {
-        if (isDetailedInteractionEnabled)
+        if (isDetailedInteractionEnabled && currentTag != null && infoPointers.ContainsKey(currentTag))
         {
-            foreach (var tag in infoPointers.Keys)
+            if (infoPointers[currentTag] > 0)
             {
-                if (infoPointers[tag] > 0)
-                {
-                    infoPointers[tag]--;
-                    DisplayInfo(tag, infoPointers[tag]);
-                    UpdateButtonStates(tag);
-                }
+                infoPointers[currentTag]--;
+                DisplayInfo(currentTag, infoPointers[currentTag]);
+                UpdateButtonStates(currentTag);
             }
         }
     }
 
     void UpdateButtonStates(string tag)
     {
-        previousButton.gameObject.SetActive(infoPointers[tag] > 0);
-        nextButton.gameObject.SetActive(infoPointers[tag] < infoTextsDict[tag].Count - 1);
+        if (infoPointers.ContainsKey(tag))
+        {
+            previousButton.gameObject.SetActive(infoPointers[tag] > 0);
+            nextButton.gameObject.SetActive(infoPointers[tag] < infoTextsDict[tag].Count - 1);
+        }
     }
 }

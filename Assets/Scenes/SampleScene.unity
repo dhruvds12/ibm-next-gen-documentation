@@ -559,7 +559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2029}
+  m_AnchoredPosition: {x: 0, y: 2029.0002}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117005629
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1324862787}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999804
+  m_Size: 0.9993179
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7899,56 +7899,74 @@ MonoBehaviour:
   - tag: laptop
     infoPrefab: {fileID: 3777848412965631654, guid: 86bc737723ffd2747b05de727c70fd3d, type: 3}
     infoTexts:
-    - Laptop
-    - Laptop2
+    - 'Description: A laptop is a portable personal computer with a built-in screen
+      and keyboard.'
+    - 'Function: Connects to the network wirelessly through the router or via wired
+      connections through the patch panel to access network resources and the internet.'
     - Laptop3
   - tag: panel
     infoPrefab: {fileID: 4693977524984080562, guid: 35233490892731b4cb615f13316be8bd, type: 3}
     infoTexts:
-    - Panel
-    - Panel2
+    - 'Description: A patch panel is a device with multiple ports that organizes
+      and connects cables from different network devices.'
+    - 'Function: Facilitates easy management and reconfiguration of the wired network
+      connections.'
     - Panel3
   - tag: firewall
     infoPrefab: {fileID: 3631150126226810128, guid: fc06b0e101eb6a3479bfbed0ff111189, type: 3}
     infoTexts:
-    - firewall
-    - firewall2
+    - 'Description: A firewall is a network security device that monitors and filters
+      incoming and outgoing network traffic based on predetermined security rules.'
+    - 'Function: Protects the internal network by controlling the traffic from the
+      modem and filtering out malicious data.'
     - firewall3
   - tag: modem
     infoPrefab: {fileID: 2212716511172784494, guid: a4e502ea6ee6c6a4482644f1bed59f4f, type: 3}
     infoTexts:
-    - modem
-    - modem2
+    - 'Description: A modem (modulator-demodulator) is a device that converts digital
+      data from a computer into analog signals for transmission over telephone lines
+      and vice versa'
+    - 'Function: Connects the local network to the internet. It communicates with
+      the web service and passes data to the router.'
     - modem3
   - tag: router
     infoPrefab: {fileID: 1246011496353840992, guid: 6516b87404168d9469c769e2a47ac9ae, type: 3}
     infoTexts:
-    - router
-    - router2
+    - 'Description: A router is a networking device that forwards data packets between
+      computer networks.'
+    - 'Function: Directs data from the modem to various devices in the network. It
+      also provides wireless connectivity to laptops and smartphones.'
     - router3
   - tag: server
     infoPrefab: {fileID: 2646448139554651323, guid: 75d2b01863ee80a4b92b87b9bd472df2, type: 3}
     infoTexts:
-    - server
-    - server2
+    - 'Description: A server is a powerful computer that provides data, resources,
+      or services to other computers over a network.'
+    - 'Function: Stores and manages network resources and services, providing them
+      to the connected devices.'
     - server3
   - tag: cloud
     infoPrefab: {fileID: 3882233727761327643, guid: 5db034e0375fb1e48a891c0e844dbb5c, type: 3}
     infoTexts:
-    - webservice
-    - webservice2
+    - 'Description: This represents an online service or resource that users access
+      via the internet.'
+    - 'Function: Provides data or services over the internet to connected devices.'
     - webservice3
   - tag: wirelesslaptop
     infoPrefab: {fileID: 6653939871376152732, guid: 90876ee33344b954ea2b95b3541d374e, type: 3}
     infoTexts:
-    - wirelesslaptop
-    - wirelesslaptop2
+    - 'Description: A laptop is a portable personal computer with a built-in screen
+      and keyboard.'
+    - 'Function: Connects to the network wirelessly through the router or via wired
+      connections through the patch panel to access network resources and the internet.'
     - wirelesslaptop3
   - tag: switch
     infoPrefab: {fileID: 8074350812001364331, guid: aa9c98104850d0244aa5f26002d3284e, type: 3}
     infoTexts:
-    - switch
-    - switch2
+    - 'Description: A network switch is a device that connects devices within a network
+      and uses packet switching to forward data to its destination.'
+    - 'Function: Distributes data between the server, patch panel, and other wired
+      devices in the network.'
     - switch3
   interactionToggle: {fileID: 477421686}
   headerText: {fileID: 186144808}
