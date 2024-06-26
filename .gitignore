@@ -85,7 +85,13 @@ crashlytics-build.properties
 /Assets/blenderObjects/
 
 # exclude prefabs
-/Assets/prefabs/
+# /Assets/prefabs/
 
 # exclude recordings
 /Recordings/
+
+network.prefab
+network.prefab.meta
+
+networkDiagram.prefab
+networkDiagram.prefab.meta
