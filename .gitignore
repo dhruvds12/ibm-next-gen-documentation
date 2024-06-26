@@ -86,3 +86,6 @@ crashlytics-build.properties
 
 # exclude prefabs
 /Assets/prefabs/
+
+# exclude recordings
+/Recordings/
