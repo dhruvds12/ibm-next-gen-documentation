@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <script>
+        window.watsonAssistantChatOptions = {
+            // Network topology chatbot
+            // integrationID: "4c92589f-e4e5-4f3d-bb81-0ceaa75770ed", // The ID of this integration.
+            // region: "eu-gb", // The region your integration is hosted in.
+            // serviceInstanceID: "df25bd48-5ebb-4b42-b865-b480168b8770", // The ID of your service instance.
+            // Travel chatbot
+            // integrationID: "8a5e65d1-9719-48fe-9ad2-f2bfcff9082a", // The ID of this integration.
+            // region: "eu-gb", // The region your integration is hosted in.
+            // serviceInstanceID: "32cea850-44ed-48bf-890f-0254b7c649c3", // The ID of your service instance.
+            integrationID: "4c92589f-e4e5-4f3d-bb81-0ceaa75770ed", // The ID of this integration.
+            region: "eu-gb", // The region your integration is hosted in.
+            serviceInstanceID: "df25bd48-5ebb-4b42-b865-b480168b8770", // The ID of your service instance.
+
+            onLoad: function (instance) {
+                instance.render();
+            },
+            showLauncher: false, // Hide the web chat launcher, you will open the WebView from your mobile application
+            openChatByDefault: true, // When the web chat WebView is opened, the web chat will already be open and ready to go.
+            hideCloseButton: true // And the web chat will not show a close button, instead relying on the controls to close the WebView
+        };
+        setTimeout(function () {
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+</body>
+
+</html>
